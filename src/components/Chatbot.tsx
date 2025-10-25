@@ -36,7 +36,7 @@ export const Chatbot = () => {
     { id: 3, text: "How to contact him?", action: "contact" },
   ];
 
-  const handleQuickReply = (reply: typeof quickReplies[0]) => {
+  const handleQuickReply = (reply: (typeof quickReplies)[0]) => {
     const userMessage: Message = {
       id: messages.length + 1,
       text: reply.text,
@@ -70,7 +70,7 @@ export const Chatbot = () => {
     setMessages([...messages, userMessage, botMessage]);
   };
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
     const userMessage: Message = {
@@ -80,15 +80,42 @@ export const Chatbot = () => {
       timestamp: new Date(),
     };
 
-    const botMessage: Message = {
-      id: messages.length + 2,
-      text: "Thanks for your message! For specific inquiries, please use the contact form on this page, and Nikhil will get back to you personally.",
-      sender: "bot",
-      timestamp: new Date(),
-    };
-
-    setMessages([...messages, userMessage, botMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInputValue("");
+
+    try {
+      const response = await fetch("http://localhost:5000/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: inputValue,
+          history: messages
+            .filter((m) => m.sender === "user")
+            .map((m) => ({ content: m.text })),
+        }),
+      });
+
+      const data = await response.json();
+
+      const botMessage: Message = {
+        id: messages.length + 2,
+        text: data.reply,
+        sender: "bot",
+        timestamp: new Date(),
+      };
+
+      setMessages((prev) => [...prev, botMessage]);
+    } catch (error) {
+      const errorMessage: Message = {
+        id: messages.length + 2,
+        text: "Oops! Something went wrong. Please try again later.",
+        sender: "bot",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
