@@ -24,8 +24,7 @@ export const Chatbot = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Flask backend URL - update this with your actual backend URL
-  const FLASK_BACKEND_URL =
-    import.meta.env.VITE_FLASK_BACKEND_URL || "http://localhost:5000";
+  const FLASK_BACKEND_URL = "https://gemini-api-flask.onrender.com";
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
