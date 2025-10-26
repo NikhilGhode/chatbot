@@ -39,8 +39,8 @@ const Index = () => {
               {[
                 "Home",
                 "About",
-                "Portfolio",
                 "Skills",
+                "Portfolio",
                 "Services",
                 "Contact",
               ].map((item) => (
@@ -177,7 +177,11 @@ const Index = () => {
               {/* Social links with hover effects */}
               <div className="flex gap-3 pt-6">
                 {[
-                  { icon: Github, href: "https://github.com/NikhilGhode", label: "GitHub" },
+                  {
+                    icon: Github,
+                    href: "https://github.com/NikhilGhode",
+                    label: "GitHub",
+                  },
                   {
                     icon: Linkedin,
                     href: "https://www.linkedin.com/in/nikhilghode9/",
@@ -436,15 +440,15 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-
               <Card className="hover:shadow-lg transition-all">
                 <CardContent className="p-6 space-y-4">
                   <h3 className="text-xl font-bold">
                     Echoes of Insight: A Deep Research Companion
                   </h3>
                   <p className="text-muted-foreground">
-                    An intelligent research assistant that echoes your curiosity and returns clarity. 
-		    Designed for structured exploration and source-backed synthesis.
+                    An intelligent research assistant that echoes your curiosity
+                    and returns clarity. Designed for structured exploration and
+                    source-backed synthesis.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="outline">OpenAi SDK</Badge>
@@ -453,14 +457,15 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-	      <Card className="hover:shadow-lg transition-all">
+              <Card className="hover:shadow-lg transition-all">
                 <CardContent className="p-6 space-y-4">
                   <h3 className="text-xl font-bold">
                     Sentient Signals: Autonomous Equity Trading Agents
                   </h3>
                   <p className="text-muted-foreground">
-                    A multi-agent system that reads market signals, executes trades, and adapts in real time. 
-		    Built for precision, autonomy, and strategic evolution.
+                    A multi-agent system that reads market signals, executes
+                    trades, and adapts in real time. Built for precision,
+                    autonomy, and strategic evolution.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="outline">MCP Server</Badge>
@@ -468,8 +473,6 @@ const Index = () => {
                   </div>
                 </CardContent>
               </Card>
-
-		
             </div>
           </div>
         </div>
